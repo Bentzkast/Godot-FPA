@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dssggj5axqdud"]
+
+[ext_resource type="Material" uid="uid://b3lbcbr8fe4gc" path="res://test.tres" id="1_84n55"]
+[ext_resource type="Script" path="res://fps_controller.gd" id="1_dws7a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_esi1r"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_rwnno"]
+material = ExtResource("1_84n55")
+
+[node name="CharacterBody3D" type="CharacterBody3D" node_paths=PackedStringArray("CAMERA_CONTROLLER")]
+script = ExtResource("1_dws7a")
+CAMERA_CONTROLLER = NodePath("Node3D/Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.81487, 0)
+shape = SubResource("CapsuleShape3D_esi1r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+material_override = ExtResource("1_84n55")
+mesh = SubResource("CapsuleMesh_rwnno")
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1.5, 2.08165e-12)
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+fov = 65.0
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="Node3D/Camera3D"]
+update_mode = 1
